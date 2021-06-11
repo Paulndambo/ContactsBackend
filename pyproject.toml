@@ -13,4 +13,5 @@ Django = "^3.0"
 python = "^3.8"
 djangorestframework = "^3.12.4"
 jwt = "^1.2.0"
+drf-yasg = "^1.20.0"
 [tool.poetry.dev-dependencies]

@@ -42,6 +42,15 @@ INSTALLED_APPS = [
     'drf_yasg',
 ]
 
+SWAGGER_SETTINGS = {
+  'SECURITY_DEFINITIONS': {
+    "Auth Token eg [Bearer] (JWT) ]":{
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
 
 REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSESS': (

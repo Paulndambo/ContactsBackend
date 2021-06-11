@@ -41,6 +41,14 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSESS': (
+    'authentication.backends.JWTAuthentication',
+  )
+}
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -122,3 +130,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
+
+#JWT
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')

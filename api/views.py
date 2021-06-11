@@ -1,12 +1,37 @@
 from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
-from . serializers import UserSerializer
+from . serializers import UserSerializer, ContactSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
 from django.contrib import auth
 import jwt
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from . models import Contact
+from rest_framework import permissions
 # Create your views here.
+#Crud views
+class ContactList(ListCreateAPIView):
+  serializer_class = ContactSerializer
+  permission_classes = (permissions.IsAuthenticated,)
+
+  def perform_create(self, serializer):
+    serializer.save(owner=self.request.user)
+
+  def get_queryset(self):
+    return Contact.objects.filter(owner=self.request.user)
+
+class ContactDetail(RetrieveUpdateDestroyAPIView):
+  serializer_class = ContactSerializer
+  permission_classes = (permissions.IsAuthenticated,)
+
+  lookup_field = "id"
+ 
+  def get_queryset(self):
+    return Contact.objects.filter(owner=self.request.user)
+
+
+#Authentication Vies
 class RegisterView(GenericAPIView):
   serializer_class = UserSerializer
 
